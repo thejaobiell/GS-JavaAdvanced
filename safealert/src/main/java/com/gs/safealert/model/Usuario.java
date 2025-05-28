@@ -8,11 +8,6 @@ import lombok.AllArgsConstructor;
 
 import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import io.swagger.v3.oas.annotations.media.Schema;
-
-
 @Entity
 @Table(name = "usuarios")
 @NoArgsConstructor

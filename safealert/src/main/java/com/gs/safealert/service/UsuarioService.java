@@ -11,7 +11,6 @@ import com.gs.safealert.repository.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UsuarioService {

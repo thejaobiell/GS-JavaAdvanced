@@ -1,0 +1,45 @@
+Usuario
+{
+	"nome": "Luis Felipe",
+	"email": "lf@gmail.com",
+	"senha": "luis123",
+	"endereco": "Rua Manuel Vieira de Sousa, 165 - Mooca",
+	"tipoUsuario": "user"
+}
+{
+	"nome": "João Gabriel",
+	"email": "jbiel2005@gmail.com",
+	"senha": "joao1234",
+	"endereco": "Rua Clark, 70 - Mooca",
+	"tipoUsuario": "admin"
+}
+
+
+
+Localidade
+{
+  "bairro": "Mooca",
+  "zona": "Zona Leste"
+}
+
+
+Evento
+{
+  "tipo": "Arvore Caída",
+  "descricao": "Arvore caiu na Entre o OXXO e o banco ITAU"
+}
+
+Postagem
+{
+  "descricao": "Arvore caiu na Entre o OXXO e o banco ITAU.",
+  "imagem": "https://exemplo.com/imagem.jpg",
+  "localidadeId": 1,
+  "eventoId": 1
+}
+
+Ocorrência
+{
+  "postagemId": 3,
+  "status": "PENDENTE"
+}
+

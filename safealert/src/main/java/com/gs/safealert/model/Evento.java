@@ -1,7 +1,6 @@
 package com.gs.safealert.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Entity
@@ -16,10 +15,9 @@ public class Evento {
     private Long id;
 
     @Column(nullable = false, length = 50)
-    @NotBlank(message = "Tipo de evento é obrigatório")
     private String tipo;
 
-    @Column(length = 100)
+    @Column(length = 120, nullable = false)
     private String descricao;
 
 	public Long getId() {

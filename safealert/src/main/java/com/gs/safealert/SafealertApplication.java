@@ -9,6 +9,4 @@ public class SafealertApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SafealertApplication.class, args);
 	}
-
 }
-

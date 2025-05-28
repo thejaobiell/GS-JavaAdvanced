@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,21 +15,32 @@ import com.gs.safealert.model.Usuario;
 import com.gs.safealert.service.UsuarioService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 
 @RestController
 @RequestMapping("/api/usuarios")
-@Tag(name = "Usuario Controller", description = "Operações para gerenciamento de usuário")
+@Tag(name = "Usuario Controller", description = "Operações de CRUD para usuário")
 public class UsuarioController {
 
     @Autowired
     private UsuarioService uS;
 
     @GetMapping
-    @Operation(summary = "Lista todos os usuarios")
-    public Page<UsuarioDTO> listar(Pageable pageable) {
+    @Operation(summary = "Lista todos os usuários com paginação")
+    @Parameters({
+        @Parameter(name = "page", description = "Número da página (0-base)"),
+        @Parameter(name = "size", description = "Quantidade de elementos por página"),
+        @Parameter(name = "sort", description = "Campo para ordenação, ex: nome,asc ou nome,desc")
+    })
+    public Page<UsuarioDTO> listar(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sort) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
         return uS.listarTodosUsuario(pageable)
                 .map(this::converterParaDTO);
     }
