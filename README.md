@@ -111,7 +111,7 @@ management.endpoints.web.exposure.include=health
 
 ## 🎥 Vídeo de Demonstração
 
-[Link para o vídeo explicativo da solução — até 10 minutos]
+[Link para o vídeo explicativo da solução — até 10 minutos](https://youtu.be/fBCf_oPNepI)
 
 ---
 
