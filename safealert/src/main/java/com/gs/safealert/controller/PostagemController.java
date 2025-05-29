@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/postagens")
-@Tag(name = "Postagem Controller", description = "Operações de CRUD para postagens")
+@Tag(name = "4º - Postagem Controller", description = "Operações de CRUD para postagens")
 public class PostagemController {
 
     @Autowired

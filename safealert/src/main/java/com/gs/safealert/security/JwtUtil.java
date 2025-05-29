@@ -10,7 +10,7 @@ import java.util.Date;
 @Component
 public class JwtUtil {
     private final String SECRET_KEY = "minha-super-chave-secreta-para-token-jwt-256-bits";
-    private final long EXPIRATION_TIME = 1000 * 60 * 60; // 1 hora
+    private final long EXPIRATION_TIME = 1000 * 60 * 60 * 24;
 
     private Key getSigningKey() {
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());

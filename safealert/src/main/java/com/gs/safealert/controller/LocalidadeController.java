@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/localidades")
-@Tag(name = "Localidade Controller", description = "Operações de CRUD para localidades")
+@Tag(name = "3º - Localidade Controller", description = "Operações de CRUD para localidades")
 public class LocalidadeController {
 
     @Autowired
