@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/eventos")
-@Tag(name = "5º - Evento Controller", description = "Operações de CRUD para eventos extremos")
+@Tag(name = "3º - Evento Controller", description = "Operações de CRUD para eventos extremos")
 public class EventoController {
 
     @Autowired

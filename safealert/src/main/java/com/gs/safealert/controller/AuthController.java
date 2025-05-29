@@ -15,7 +15,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/auth")
-@Tag(name = "1º - Autenticação JWT", description = "Geração de token JWT para autenticar nas rotas protegidas da API")
+@Tag(name = "Autenticação JWT", description = "Geração de token JWT para autenticar nas rotas protegidas da API")
 public class AuthController {
 
     @Autowired private AuthenticationManager authManager;

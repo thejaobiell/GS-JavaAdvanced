@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/ocorrencias")
-@Tag(name = "6º - Ocorrencia Controller", description = "Operações de CRUD para ocorrências")
+@Tag(name = "5º - Ocorrencia Controller", description = "Operações de CRUD para ocorrências")
 public class OcorrenciaController {
 
     @Autowired
