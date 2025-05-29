@@ -1,8 +1,21 @@
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin:17-jdk AS build
 
 WORKDIR /app
 
-COPY target/safealert-0.0.1-SNAPSHOT.jar app.jar
+COPY .mvn .mvn
+COPY mvnw .
+COPY pom.xml .
+COPY src src
+
+RUN chmod +x mvnw
+
+RUN ./mvnw clean package -DskipTests
+
+FROM eclipse-temurin:17-jre
+
+WORKDIR /app
+
+COPY --from=build /app/target/safealert-0.0.1-SNAPSHOT.jar app.jar
 
 EXPOSE 8080
 
