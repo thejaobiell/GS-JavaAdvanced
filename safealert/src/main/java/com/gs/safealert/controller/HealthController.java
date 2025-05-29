@@ -5,9 +5,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HealthController {
-
     @GetMapping("/")
-    public String healthCheck() {
+    public String hello() {
+        return "API do SafeAlert";
+    }
+
+    @GetMapping("/health")
+    public String health() {
         return "OK";
     }
 }
+
