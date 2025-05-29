@@ -69,6 +69,8 @@ spring.datasource.driver-class-name=oracle.jdbc.OracleDriver
 
 spring.jpa.database-platform=org.hibernate.dialect.OracleDialect
 spring.jpa.hibernate.ddl-auto=update
+
+management.endpoints.web.exposure.include=health
 ```
 
 ### 4. Rode o projeto
