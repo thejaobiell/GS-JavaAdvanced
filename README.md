@@ -18,7 +18,7 @@
 
 - **Back-end:** Java 17 + Spring Boot
 - **Segurança:** Spring Security + JWT
-- **Banco de Dados:** PostgreSQL (ou Oracle database para testes em localhost)
+- **Banco de Dados:** PostgreSQL (Utilizado no DEPLOY) ou Oracle Database (Utilizado para testes em localhost)
 - **Deploy:** Render.com
 - **Gerenciamento de dependências:** Maven
 - **Documentação da API:** Swagger
@@ -43,21 +43,21 @@ A aplicação está disponível no seguinte link:
 
 ---
 
-### 🔧 Passos para execução
+# 🔧 Passos para execução
 
-#### ✅ Opção 1: Terminal
+## ✅ Opção 1: Terminal
 
-# 1. Clone o repositório
+### 1. [Clone o repositório](https://github.com/thejaobiell/GS-JavaAdvanced)
 ```bash
 git clone https://github.com/thejaobiell/GS-JavaAdvanced.git
 ```
 
-# 2. Acesse o diretório do projeto
+### 2. Acesse o diretório do projeto
 ```bash
 cd GS-JavaAdvanced/safealert
 ```
 
-# 3. Configure o arquivo application.properties para rodar com Oracle:
+### 3. Configure o arquivo application.properties para rodar com Oracle:
 ```bash
 
 spring.application.name=safealert
@@ -71,47 +71,49 @@ spring.jpa.database-platform=org.hibernate.dialect.OracleDialect
 spring.jpa.hibernate.ddl-auto=update
 ```
 
-# 4. Rode o projeto
+### 4. Rode o projeto
 ```bash
 ./mvnw spring-boot:run
 ```
 
 ---
 
-#### ✅ Opção 2: Importar o projeto no Eclipse IDE
+## ✅ Opção 2: Importar o projeto no Eclipse IDE
 
-# 1. Abra o Eclipse IDE
+### 1. Abra o Eclipse IDE
 
-# 2. Vá em: File > Import...
+### 2. Vá em: File > Import...
 
-# 3. Selecione: Maven > Existing Maven Projects
+### 3. Selecione: Maven > Existing Maven Projects
 
-# 4. Clique em "Browse" e selecione a pasta do projeto (ex: GS-JavaAdvanced/safealert)
+### 4. Clique em "Browse" e selecione a pasta do projeto (ex: GS-JavaAdvanced/safealert)
 
-# 5. Marque o arquivo pom.xml
+### 5. Marque o arquivo pom.xml
 
-# 6. Clique em "Finish" para concluir a importação
+### 6. Clique em "Finish" para concluir a importação
 
-# 7. Configure o arquivo application.properties com os dados do Oracle (veja passo anterior)
+### 7. Configure o arquivo application.properties com os dados do Oracle (veja passo anterior)
 
-# 8. Execute o projeto com: Run As > Spring Boot App
+### 8. Execute o projeto com: Run As > Spring Boot App
 
 ---
 
-## 🔐 Credenciais para JWT
+## 🔐 Credenciais para TOKEN JWT
 
-* **Usuário:** `admin@safealert.com`
-* **Senha:** `2tdsb-2025`
+* **username:** `admin@safealert.com`
+* **password:** `2tdsb-2025`
+
+> Use o método **POST** caso for utilizar POSTMAN/INSOMNIA para conseguir o TOKEN JWT
 
 ---
 
 ## 🎥 Vídeo de Demonstração
 
-📺 \[Link para o vídeo explicativo da solução — até 10 minutos]
+[Link para o vídeo explicativo da solução — até 10 minutos]
 
 ---
 
-## 👨‍💻 Autor
+## 👨‍💻 Membros do Grupo
 
 * **João Gabriel Boaventura Marques e Silva** – RM554874 – 2TDSB2025
 * **Léo Mota Lima** – RM557851 – 2TDSB2025
