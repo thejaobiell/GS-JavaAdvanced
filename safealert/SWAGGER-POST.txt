@@ -32,7 +32,7 @@ Evento
 Postagem
 {
   "descricao": "Arvore caiu na Entre o OXXO e o banco ITAU.",
-  "imagem": "https://exemplo.com/imagem.jpg",
+  "imagem": "https://i.imgur.com/ksaRZbM.jpeg",
   "localidadeId": 1,
   "eventoId": 1
 }
@@ -42,4 +42,3 @@ Ocorrência
   "postagemId": 3,
   "status": "PENDENTE"
 }
-
