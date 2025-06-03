@@ -51,9 +51,9 @@ public class OcorrenciaController {
     }
 
     @PutMapping("/update/{id}")
-    @Operation(summary = "Atualizar ocorrência")
-    public ResponseEntity<OcorrenciaDTO> atualizar(@PathVariable Long id, @Valid @RequestBody OcorrenciaDTO dto) {
-        Ocorrencia atualizado = oS.atualizar(id, toEntity(dto));
+    @Operation(summary = "Atualizar apenas o status da ocorrência")
+    public ResponseEntity<OcorrenciaDTO> atualizar(@PathVariable Long id, @RequestBody OcorrenciaDTO dto) {
+        Ocorrencia atualizado = oS.atualizarStatus(id, dto.getStatus());
         return ResponseEntity.ok(toDTO(atualizado));
     }
 

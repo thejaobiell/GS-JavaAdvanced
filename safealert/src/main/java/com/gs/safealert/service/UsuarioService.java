@@ -38,6 +38,19 @@ public class UsuarioService {
     public Usuario salvarUsuario(Usuario usuario) {
         return uR.save(usuario);
     }
+    
+    public Usuario atualizarUsuario(Long id, Usuario usuarioAtualizado) {
+        Usuario usuarioExistente = uR.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado com id " + id));
+
+        usuarioExistente.setNome(usuarioAtualizado.getNome());
+        usuarioExistente.setEmail(usuarioAtualizado.getEmail());
+        usuarioExistente.setSenha(usuarioAtualizado.getSenha());
+        usuarioExistente.setEndereco(usuarioAtualizado.getEndereco());
+        usuarioExistente.setTipoUsuario(usuarioAtualizado.getTipoUsuario());
+
+        return uR.save(usuarioExistente);
+    }
 
     public void deletarUsuario(Long id) {
         if (!uR.existsById(id)) {

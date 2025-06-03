@@ -77,6 +77,14 @@ public class UsuarioController {
         Usuario salvo = uS.salvarUsuario(user);
         return ResponseEntity.status(201).body(converterParaDTO(salvo));
     }
+    
+    @PutMapping("/atualizar/{id}")
+    @Operation(summary = "Atualiza um usuário existente")
+    public ResponseEntity<UsuarioDTO> atualizar(@PathVariable Long id, @Valid @RequestBody UsuarioDTO dto) {
+        Usuario usuario = converterParaEntidade(dto);
+        Usuario atualizado = uS.atualizarUsuario(id, usuario);
+        return ResponseEntity.ok(converterParaDTO(atualizado));
+    }
 
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "Deleta usuário")

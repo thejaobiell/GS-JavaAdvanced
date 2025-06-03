@@ -16,50 +16,46 @@ import java.util.List;
 public class OcorrenciaService {
 
     @Autowired
-    private OcorrenciaRepository ocorrenciaRepository;
+    private OcorrenciaRepository oR;
 
     @Autowired
-    private PostagemRepository postagemRepository;
+    private PostagemRepository pR;
 
     public List<Ocorrencia> listarTodos() {
-        return ocorrenciaRepository.findAll();
+        return oR.findAll();
     }
 
     public Ocorrencia buscarPorId(Long id) {
-        return ocorrenciaRepository.findById(id)
+        return oR.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Ocorrência não encontrada com id " + id));
     }
 
     public Ocorrencia salvar(Ocorrencia ocorrencia) {
-        // Validação da postagem vinculada
         Long postagemId = ocorrencia.getPostagem().getId();
-        Postagem postagem = postagemRepository.findById(postagemId)
+        Postagem postagem = pR.findById(postagemId)
                 .orElseThrow(() -> new EntityNotFoundException("Postagem não encontrada com id " + postagemId));
         ocorrencia.setPostagem(postagem);
-        return ocorrenciaRepository.save(ocorrencia);
+        return oR.save(ocorrencia);
     }
 
-    public Ocorrencia atualizar(Long id, Ocorrencia ocorrenciaAtualizada) {
+    public Ocorrencia atualizarStatus(Long id, String novoStatus) {
         Ocorrencia ocorrencia = buscarPorId(id);
-        ocorrencia.setStatus(ocorrenciaAtualizada.getStatus());
-        if (ocorrenciaAtualizada.getDataOcorrencia() != null) {
-            ocorrencia.setDataOcorrencia(ocorrenciaAtualizada.getDataOcorrencia());
-        }
-        return ocorrenciaRepository.save(ocorrencia);
+        ocorrencia.setStatus(Ocorrencia.Status.valueOf(novoStatus));
+        return oR.save(ocorrencia);
     }
 
     public void deletar(Long id) {
-        if (!ocorrenciaRepository.existsById(id)) {
+        if (!oR.existsById(id)) {
             throw new EntityNotFoundException("Ocorrência não encontrada com id " + id);
         }
-        ocorrenciaRepository.deleteById(id);
+        oR.deleteById(id);
     }
 
     public List<Ocorrencia> buscarPorStatus(String status) {
-        return ocorrenciaRepository.findByStatus(status);
+        return oR.findByStatus(status);
     }
 
     public List<Ocorrencia> buscarPorPostagem(Long postagemId) {
-        return ocorrenciaRepository.findByPostagemId(postagemId);
+        return oR.findByPostagemId(postagemId);
     }
 }
