@@ -117,10 +117,13 @@ http://localhost:8080/api/<endpoint>
 
 ---
 
-## 🎥 Demonstração em Vídeo
+## 🎥 Vídeos
 
-📽️ [Assista à demonstração da solução (até 10 minutos)](https://youtu.be/fBCf_oPNepI)
+SERÁ REFEITO
 
+📽️ [Demonstração da Solução:](https://youtu.be/fBCf_oPNepI)
+
+📽️ [Pitch](https://www.youtube.com/watch?v=YEXlSVQTqaA)
 ---
 
 ## 👨‍💻 Membros do Grupo
