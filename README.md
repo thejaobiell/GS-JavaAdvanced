@@ -134,7 +134,10 @@ http://<IP LOCAL DA MÁQUINA>:8080/api/<endpoint>
 
 ## 🎥 Vídeos
 
-📽️ [Pitch](https://www.youtube.com/watch?v=YEXlSVQTqaA)
+📽️ [Vídeo Pitch](https://www.youtube.com/watch?v=YEXlSVQTqaA)
+
+
+📽️ [Vídeo Demonstrando a API](https://youtu.be/SbV9s94TQM8)
 
 ---
 
