@@ -68,19 +68,34 @@ spring.datasource.driver-class-name=oracle.jdbc.OracleDriver
 spring.jpa.database-platform=org.hibernate.dialect.OracleDialect
 spring.jpa.hibernate.ddl-auto=update
 
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
 management.endpoints.web.exposure.include=health
 ```
 
 ### 4. Execute o projeto
 
+Em linux:
 ```bash
 ./mvnw spring-boot:run
+```
+
+Em Windows:
+```bash
+mvnw.cmd spring-boot:run
 ```
 
 ### 5. Teste localmente
 
 ```bash
 http://localhost:8080/api/<endpoint>
+```
+
+ou
+
+```bash
+http://<IP LOCAL DA MÁQUINA>:8080/api/<endpoint>
 ```
 
 > Caso esteja online, utilize a URL de Deploy:
@@ -104,7 +119,7 @@ http://localhost:8080/api/<endpoint>
 
 ### 7. Configure o `application.properties` conforme instruções anteriores
 
-### 8. Execute o projeto com: `Run As > Spring Boot App`
+### 8. Execute o projeto com: `Run As > Java Application`
 
 ---
 
@@ -119,11 +134,8 @@ http://localhost:8080/api/<endpoint>
 
 ## 🎥 Vídeos
 
-SERÁ REFEITO
-
-📽️ [Demonstração da Solução:](https://youtu.be/fBCf_oPNepI)
-
 📽️ [Pitch](https://www.youtube.com/watch?v=YEXlSVQTqaA)
+
 ---
 
 ## 👨‍💻 Membros do Grupo
