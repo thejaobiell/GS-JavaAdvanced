@@ -3,7 +3,6 @@ package com.gs.safealert.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -20,7 +19,6 @@ import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
-
 @RestController
 @RequestMapping("/api/usuarios")
 @Tag(name = "1º - Usuario Controller", description = "Operações de CRUD para usuário")
@@ -32,17 +30,20 @@ public class UsuarioController {
     @GetMapping
     @Operation(summary = "Lista todos os usuários com paginação")
     @Parameters({
-        @Parameter(name = "page", description = "Número da página (0-base)"),
-        @Parameter(name = "size", description = "Quantidade de elementos por página"),
-        @Parameter(name = "sort", description = "Campo para ordenação, ex: nome,asc ou nome,desc")
+            @Parameter(name = "page", description = "Número da página (0-base)"),
+            @Parameter(name = "size", description = "Quantidade de elementos por página"),
+            @Parameter(name = "sort", description = "Campo para ordenação, ex: nome,asc ou nome,desc")
     })
-    public Page<UsuarioDTO> listar(
+    public List<UsuarioDTO> listar(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sort) {
+
         Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+
         return uS.listarTodosUsuario(pageable)
-                .map(this::converterParaDTO);
+                .map(this::converterParaDTO)
+                .getContent();
     }
 
     @GetMapping("/id/{id}")
@@ -51,24 +52,23 @@ public class UsuarioController {
         Usuario user = uS.buscarPorIdUsuario(id);
         return ResponseEntity.ok(converterParaDTO(user));
     }
-    
+
     @GetMapping("/email/{email}")
     @Operation(summary = "Buscar por EMAIL")
     public ResponseEntity<UsuarioDTO> buscarPorEmail(@PathVariable String email) {
         Usuario user = uS.buscarPorEmailUsuario(email);
         return ResponseEntity.ok(converterParaDTO(user));
     }
-    
+
     @GetMapping("/endereco/{endereco}")
     @Operation(summary = "Buscar por ENDEREÇO (PODENDO PESQUISAR BAIRRO OU RUA)")
     public ResponseEntity<List<UsuarioDTO>> buscarPorEndereco(@PathVariable String endereco) {
         List<Usuario> users = uS.buscarPorEnderecoUsuario(endereco);
         List<UsuarioDTO> dtos = users.stream()
-            .map(this::converterParaDTO)
-            .toList();
+                .map(this::converterParaDTO)
+                .toList();
         return ResponseEntity.ok(dtos);
     }
-
 
     @PostMapping
     @Operation(summary = "Cria usuário")
@@ -77,7 +77,7 @@ public class UsuarioController {
         Usuario salvo = uS.salvarUsuario(user);
         return ResponseEntity.status(201).body(converterParaDTO(salvo));
     }
-    
+
     @PutMapping("/atualizar/{id}")
     @Operation(summary = "Atualiza um usuário existente")
     public ResponseEntity<UsuarioDTO> atualizar(@PathVariable Long id, @Valid @RequestBody UsuarioDTO dto) {

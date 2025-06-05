@@ -26,22 +26,23 @@ public class UsuarioService {
         return uR.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado com id " + id));
     }
-    
+
     public Usuario buscarPorEmailUsuario(String email) {
-    	return uR.findByEmail(email).orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado com email " + email));
+        return uR.findByEmail(email)
+                .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado com email " + email));
     }
-    
-    public List <Usuario> buscarPorEnderecoUsuario(String endereco) {
-    	return uR.findByEndereco(endereco);
+
+    public List<Usuario> buscarPorEnderecoUsuario(String endereco) {
+        return uR.findByEndereco(endereco);
     }
 
     public Usuario salvarUsuario(Usuario usuario) {
         return uR.save(usuario);
     }
-    
+
     public Usuario atualizarUsuario(Long id, Usuario usuarioAtualizado) {
         Usuario usuarioExistente = uR.findById(id)
-            .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado com id " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado com id " + id));
 
         usuarioExistente.setNome(usuarioAtualizado.getNome());
         usuarioExistente.setEmail(usuarioAtualizado.getEmail());

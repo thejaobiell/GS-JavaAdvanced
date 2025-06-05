@@ -8,11 +8,17 @@ import com.gs.safealert.model.Postagem;
 import com.gs.safealert.model.Usuario;
 import com.gs.safealert.service.PostagemService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,13 +32,28 @@ public class PostagemController {
     private PostagemService pS;
 
     @GetMapping
-    @Operation(summary = "Listar todas as postagens")
-    public ResponseEntity<List<PostagemDTO>> listar() {
-        List<PostagemDTO> dtos = pS.listarTodos()
-                .stream()
-                .map(this::toDTO)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(dtos);
+    @Operation(summary = "Listar todas as postagens com paginação")
+    @Parameters({
+            @Parameter(name = "page", description = "Número da página (0-base)", example = "0"),
+            @Parameter(name = "size", description = "Quantidade de elementos por página", example = "10"),
+            @Parameter(name = "sort", description = "Campo para ordenação, ex: dataCriacao,desc ou titulo,asc", example = "dataCriacao,desc")
+    })
+    public List<Postagem> listarPostagens(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "dataCriacao,desc") String sort) {
+
+        String[] sortParams = sort.split(",");
+        Sort.Direction direction = Sort.Direction.fromString(sortParams.length > 1 ? sortParams[1] : "asc");
+        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortParams[0]));
+
+        return pS.listarTodos(pageable).getContent(); // Retorna somente o conteúdo da página
+    }
+
+    @GetMapping("/buscar")
+    @Operation(summary = "Busca todas as postagens relacionadas ao título")
+    public Page<Postagem> buscar(@RequestParam String termo, Pageable pageable) {
+        return pS.buscarPorTituloOuDescricao(termo, pageable);
     }
 
     @GetMapping("/id/{id}")
@@ -83,11 +104,10 @@ public class PostagemController {
     @PutMapping("/update/{id}")
     @Operation(summary = "Atualizar apenas a descrição da postagem existente")
     public ResponseEntity<PostagemDTO> atualizar(@PathVariable Long id,
-                                                 @Valid @RequestBody PostagemDescricaoDTO dto) {
+            @Valid @RequestBody PostagemDescricaoDTO dto) {
         Postagem atualizado = pS.atualizarDescricao(id, dto.getDescricaoAtualizada());
         return ResponseEntity.ok(toDTO(atualizado));
     }
-
 
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "Deletar postagem")
@@ -112,7 +132,7 @@ public class PostagemController {
     private Postagem toEntity(PostagemDTO dto) {
         Postagem postagem = new Postagem();
 
-        if(dto.getId() != null)
+        if (dto.getId() != null)
             postagem.setId(dto.getId());
 
         Usuario usuario = new Usuario();
@@ -132,7 +152,7 @@ public class PostagemController {
         postagem.setDescricao(dto.getDescricao());
         postagem.setImagemUrl(dto.getImagemUrl());
 
-        if(dto.getDataCriacao() != null)
+        if (dto.getDataCriacao() != null)
             postagem.setDataCriacao(dto.getDataCriacao());
 
         return postagem;

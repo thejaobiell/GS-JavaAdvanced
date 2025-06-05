@@ -33,7 +33,7 @@ public class LocalidadeService {
     public Localidade salvarLocalidade(Localidade localidade) {
         return lR.save(localidade);
     }
-    
+
     public Localidade atualizarLocalidade(Long id, LocalidadeDTO dto) {
         Localidade existente = buscarPorIdLocalidade(id);
         existente.setBairro(dto.getBairro());

@@ -4,6 +4,8 @@ import com.gs.safealert.model.Postagem;
 import com.gs.safealert.repository.PostagemRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +20,12 @@ public class PostagemService {
         return pR.save(postagem);
     }
 
-    public List<Postagem> listarTodos() {
-        return pR.findAll();
+    public Page<Postagem> listarTodos(Pageable pageable) {
+        return pR.findAll(pageable);
+    }
+
+    public Page<Postagem> buscarPorTituloOuDescricao(String termo, Pageable pageable) {
+        return pR.buscarPorTituloOuDescricao(termo, pageable);
     }
 
     public Postagem buscarPorId(Long id) {
@@ -41,11 +47,10 @@ public class PostagemService {
 
     public Postagem atualizarDescricao(Long id, String novaDescricao) {
         Postagem postagem = pR.findById(id)
-            .orElseThrow(() -> new EntityNotFoundException("Postagem não encontrada"));
+                .orElseThrow(() -> new EntityNotFoundException("Postagem não encontrada"));
         postagem.setDescricao(novaDescricao);
         return pR.save(postagem);
     }
-
 
     public void deletar(Long id) {
         if (!pR.existsById(id)) {
