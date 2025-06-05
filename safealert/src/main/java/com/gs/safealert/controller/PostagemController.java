@@ -47,11 +47,11 @@ public class PostagemController {
         Sort.Direction direction = Sort.Direction.fromString(sortParams.length > 1 ? sortParams[1] : "asc");
         Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortParams[0]));
 
-        return pS.listarTodos(pageable).getContent(); // Retorna somente o conteúdo da página
+        return pS.listarTodos(pageable).getContent();
     }
 
     @GetMapping("/buscar")
-    @Operation(summary = "Busca todas as postagens relacionadas ao título")
+    @Operation(summary = "Busca todas as postagens relacionadas ao título ou descrição")
     public Page<Postagem> buscar(@RequestParam String termo, Pageable pageable) {
         return pS.buscarPorTituloOuDescricao(termo, pageable);
     }
